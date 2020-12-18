@@ -3,7 +3,9 @@ import {
   Typography,
   Button,
   Grid,
-  CircularProgress
+  Container,
+  CircularProgress,
+  makeStyles
 } from '@material-ui/core';
 import ProjectCard from '../components/ProjectCard';
 import ScreenLayout from '../layout/ScreenLayout';
@@ -11,7 +13,15 @@ import axios from 'axios';
 import { fakeUserId } from '../constants';
 import { useHistory } from 'react-router-dom';
 
+const useStyles = makeStyles((theme) => ({
+  spinnerContainer: {
+      width: 'auto'
+  }
+}));
+
+
 const Dashboard = () => {
+  const classes = useStyles();
   const history = useHistory();
 
   const [hasFetched, setHasFetched] = useState(false);
@@ -47,6 +57,7 @@ const Dashboard = () => {
         <Grid
           container
           item
+          xs={12}
         >
           <Typography paragraph={true} variant={'h4'}>{'My Projects'}</Typography>
           <Typography paragraph={true} >{'Looks like you don\'t have any projects yet! Start a new one or choose from some sample projects below.'}</Typography>
@@ -70,15 +81,28 @@ const Dashboard = () => {
         <Grid
           container
           item
+          xs={12}
         >
           <Typography paragraph={true} variant={'h4'}>{'Sample Projects'}</Typography>
           {
-            sampleProjects.length > 0 && sampleProjects.map(project => (
+            sampleProjects.length > 0 ? 
+            (sampleProjects.map(project => (
               <ProjectCard 
                 project={project}
                 key={project.id}
               />
-            ))
+            )))
+            : (
+              <Grid
+                container
+                item
+                xs={12}
+              >
+                <Container className={classes.spinnerContainer}>
+                  <CircularProgress />
+                </Container>
+              </Grid>
+            )
           }
         </Grid>
       </Grid>

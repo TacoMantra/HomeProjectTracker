@@ -3,7 +3,6 @@ import { Container, Card, Typography, Button, makeStyles } from '@material-ui/co
 
 const useStyles = makeStyles((theme) => ({
     projectCard: {
-        margin: theme.spacing(2, 0),
         padding: theme.spacing(2)
     },
 }));
@@ -18,7 +17,7 @@ const ProjectCard = ({ project }) => {
                 <Typography paragraph={true} variant={'h5'}>{project.name}</Typography>
                 <Typography paragraph={true}>{project.description}</Typography>
                 <Button
-                    variant={'contained'}
+                    variant={'outlined'}
                     color={'primary'}
                     fullWidth
                 >
