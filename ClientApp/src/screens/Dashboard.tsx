@@ -5,8 +5,10 @@ import {
   Grid,
   Container,
   CircularProgress,
+  Icon,
   makeStyles
 } from '@material-ui/core';
+import TelegramIcon from '@material-ui/icons/Telegram';
 import ProjectCard from '../components/ProjectCard';
 import ScreenLayout from '../layout/ScreenLayout';
 import axios from 'axios';
@@ -65,6 +67,7 @@ const Dashboard = () => {
             variant={'contained'}
             color={'primary'}
             onClick={createNewProject}
+            endIcon={<TelegramIcon />}
             fullWidth
           >
             {
