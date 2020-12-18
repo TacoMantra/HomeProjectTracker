@@ -24,10 +24,16 @@
             {
                 FirstName = "DIY",
                 LastName = "Tracker",
-                UserType = 0
+                UserType = UserType.system
             };
 
-            var replaceOutletCover = new Project
+            var fakeUser = new User
+            {
+                FirstName = "Tim",
+                LastName = "Toolman"
+            };
+
+            var replaceOutletCover = new Project()
             {
                 User = systemUser,
                 Name = "Replace Outlet Cover",
@@ -82,7 +88,10 @@
 
             try
             {
-                context.Users.AddOrUpdate(systemUser);
+                context.Users.AddOrUpdate(
+                    systemUser,
+                    fakeUser
+                );
                 context.Projects.AddOrUpdate(replaceOutletCover);
                 context.Materials.AddOrUpdate(outletCover);
                 context.Tools.AddOrUpdate(flatHeadScrewdriver);

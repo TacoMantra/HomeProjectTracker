@@ -1,24 +1,38 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "esnext",
+    "moduleResolution": "Node",
     "target": "es5",
-    "allowJs": true,
+    "importHelpers": true,
+    "lib": ["dom", "esnext"],
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "lib": [
-      "es2015",
-      "dom"
-    ],
-    "skipLibCheck": false
+    "jsx": "react",
+    // the following are enforced by ESLint
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "allowJs": false, // suggested value: true (this can be changed)
+    "skipLibCheck": true, // suggested value: true (this can be changed)
+    "forceConsistentCasingInFileNames": true, // suggested value: true (this can be changed)
+    "resolveJsonModule": true, // must be true (to match webpack loader)
+    "isolatedModules": true, // must be true (implementation limitation)
+    "noEmit": true // must be true
   },
   "include": [
-    "src"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "scripts"
   ]
 }

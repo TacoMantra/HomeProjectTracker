@@ -6,6 +6,11 @@ using System.Web;
 
 namespace HomeProjectTracker.Models
 {
+    public enum UserType
+    {
+        system,
+        real
+    }
     public class User
     {
         [Key]
@@ -15,6 +20,6 @@ namespace HomeProjectTracker.Models
 
         public string LastName { get; set; }
 
-        public int UserType { get; set; } // TODO: not sure how to do EF migration for enum, but this should be an enum
+        public UserType UserType { get; set; } = UserType.real;
     }
 }

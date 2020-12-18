@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Button, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Container } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import StyledPaper from '../components/StyledPaper';
 
 const ScreenLayout = ({children}) => (
     <React.Fragment>
@@ -14,7 +15,13 @@ const ScreenLayout = ({children}) => (
                 </Typography>
             </Toolbar>
         </AppBar>
-        {children}
+        <Container maxWidth="sm">
+            <StyledPaper
+                elevation={2}
+            >
+                {children}
+            </StyledPaper>
+        </Container>
     </React.Fragment>
 );
 
