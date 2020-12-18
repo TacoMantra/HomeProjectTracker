@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Dashboard from './screens/Dashboard';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import NewProjectScreen, { NewProjectScreenPath } from './screens/NewProjectScreen';
 import ProjectScreen, { ProjectScreenPath } from './screens/ProjectScreen';
 
 const App = () => (
@@ -16,6 +17,10 @@ const App = () => (
         exact
         path={'/'}
         component={Dashboard}
+      />
+      <Route
+        path={NewProjectScreenPath}
+        component={NewProjectScreen}
       />
       <Route
         path={ProjectScreenPath}

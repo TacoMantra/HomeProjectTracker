@@ -42,15 +42,17 @@ namespace HomeProjectTracker.Controllers
         /// <summary>Creates a new project.</summary>
         /// <returns>int: the new project's id</returns>
         /// [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPost("NewProject/{userId}")]
-        public ActionResult<int> NewProject(int userId)
+        [HttpPost("NewProject")]
+        public ActionResult<int> NewProject([FromBody] Project project)
         {
             try
             {
-                var user = db.Users.Find(userId);
+                var user = db.Users.Find(project.User.Id);
                 var newProject = new Project()
                 {
-                    User = user
+                    User = user,
+                    Name = project.Name,
+                    Description = project.Description
                 };
                 var projectEntity = db.Projects.Add(newProject);
                 db.SaveChanges();
@@ -58,7 +60,7 @@ namespace HomeProjectTracker.Controllers
             }
             catch
             {
-                _logger.LogError($"Unable to create project for user {userId}.");
+                _logger.LogError($"Unable to create project {project.Name} for user {project.User.Id}.");
                 return StatusCode(500);
             }
         }

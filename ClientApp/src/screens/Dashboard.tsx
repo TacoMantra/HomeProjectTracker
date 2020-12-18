@@ -4,16 +4,18 @@ import {
   Button,
   Grid,
   Container,
-  CircularProgress,
   Icon,
+  CircularProgress,
   makeStyles
 } from '@material-ui/core';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import ProjectCard from '../components/ProjectCard';
+import Loading from '../components/Loading';
 import ScreenLayout from '../layout/ScreenLayout';
 import axios from 'axios';
 import { fakeUserId } from '../constants';
 import { useHistory } from 'react-router-dom';
+import { NewProjectScreenPath } from './NewProjectScreen';
 
 const useStyles = makeStyles((theme) => ({
   spinnerContainer: {
@@ -36,11 +38,10 @@ const Dashboard = () => {
       setSampleProjects(response.data);
   }, [setSampleProjects]);
 
-  const createNewProject = useCallback(async () => {
+  const createNewProject = useCallback(() => {
     setIsLoadingNewProject(true);
-    const response = await axios.post(`Project/NewProject/${fakeUserId}`); // TODO: real user Ids
-    history.push(`projects/${response.data}`);
-  }, [setIsLoadingNewProject, history]);
+    history.push(NewProjectScreenPath);
+  }, [setIsLoadingNewProject, history, NewProjectScreenPath]);
 
   useEffect(() => {
     if (!hasFetched) {
@@ -68,6 +69,7 @@ const Dashboard = () => {
             color={'primary'}
             onClick={createNewProject}
             endIcon={<TelegramIcon />}
+            disabled={isLoadingNewProject}
             fullWidth
           >
             {
@@ -89,23 +91,15 @@ const Dashboard = () => {
           <Typography paragraph={true} variant={'h4'}>{'Sample Projects'}</Typography>
           {
             sampleProjects.length > 0 ? 
-            (sampleProjects.map(project => (
-              <ProjectCard 
-                project={project}
-                key={project.id}
-              />
-            )))
-            : (
-              <Grid
-                container
-                item
-                xs={12}
-              >
-                <Container className={classes.spinnerContainer}>
-                  <CircularProgress />
-                </Container>
-              </Grid>
-            )
+            (
+              sampleProjects.map(project => (
+                <ProjectCard 
+                  project={project}
+                  key={project.id}
+                />
+              ))
+            ) :
+            <Loading />
           }
         </Grid>
       </Grid>

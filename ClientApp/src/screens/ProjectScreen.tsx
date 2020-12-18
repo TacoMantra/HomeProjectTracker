@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import ScreenLayout from '../layout/ScreenLayout';
+import Loading from '../components/Loading';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Typography } from '@material-ui/core';
@@ -27,12 +28,14 @@ const ProjectScreen = () => {
         <ScreenLayout>
             {
                 project ?
-                    <Typography
-                        variant={'h4'}
-                    >
-                        {project.name ?? 'New Project'}
-                    </Typography>
-                : null
+                    (
+                        <Typography
+                            variant={'h4'}
+                        >
+                            {project.name}
+                        </Typography>
+                    ) :
+                <Loading />
             }
         </ScreenLayout>
     )
